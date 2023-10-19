@@ -10,21 +10,29 @@
     <header>
       <h1 class="header_title">Best Movie Collection</h1>
     </header>
-    <section class="search_container">
-      <form class="search_form">
-        <label for="search_input">Search Movie:</label>
-        <input
-          type="text"
-          placeholder="영화 제목을 검색해 보세요"
-          id="search_input"
-        />
-        <button>검색</button>
-      </form>
-    </section>
+    <div class="searchForm_log_wrapper">
+      <section class="search_container">
+        <form class="search_form">
+          <label for="search_input">Search Movie:</label>
+          <input
+            type="text"
+            placeholder="영화 제목을 검색해 보세요"
+            id="search_input"
+          />
+          <button>검색</button>
+        </form>
+        <button class="reset_button">초기화</button>
+      </section>
+      <div class="search_log">
+        <h4>검색 기록:</h4>
+        <ul class="search_log_list"></ul>
+      </div>
+    </div>
+
     <main class="movie_container">
       <!--JS로 UI 생성 -->
     </main>
 
-    <script src="./app.js"></script>
+    <script src="/app.js"></script>
   </body>
 </html>

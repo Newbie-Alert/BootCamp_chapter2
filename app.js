@@ -2,6 +2,8 @@ const movieContainer = document.querySelector('.movie_container');
 const movieCard = document.querySelector('.movie_card');
 const searchForm = document.querySelector('.search_form');
 const searchInput = document.querySelector('#search_input')
+const resetBtn = document.querySelector('.reset_button');
+const searchList = document.querySelector('.search_log_list');
 const options = {
   method: 'GET',
   headers: {
@@ -10,30 +12,41 @@ const options = {
   }
 };
 
+// 초기 화면 그리는 함수
 fetchData()
 
+// 검색 기능
 searchForm.addEventListener('submit', (e) => {
   e.preventDefault();
   searchMovie(searchInput.value)
+  searchLog(searchInput.value)
   searchInput.value = ''
 })
 
+// 영화 카드 클릭 시 alert
 movieCard?.addEventListener('click', (e) => {
   console.log(e.target.dataset.id);
   alert(`영화 id: ${e.target.dataset.id}`)
 })
 
-//==============
-// FUNCTION
-//==============
 
-// 초기 화면 그리기
+// 초기화
+resetBtn.addEventListener('click', () => {
+  movieContainer.innerHTML = ''
+  searchInput.value = ''
+  fetchData();
+})
+
+
+//==========
+// FUNCTION
+//==========
+
+// 데이터 fetch 후 초기 화면 그리기
 async function fetchData() {
-  let data;
   const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
-  data = await res.json();
+  let data = await res.json();
   // 카드 UI로 데이터 전달
-  console.log(data);
   createCard(data.results);
 }
 
@@ -66,3 +79,7 @@ async function searchMovie(searchValue) {
   createCard(filtered)
 }
 
+function searchLog(searchValue) {
+  let logHTML = `<li class="list_item" data-name=${searchValue} onclick="(e) => searchByLog(e)">${searchValue}</li>`;
+  searchList.insertAdjacentHTML('beforeend', logHTML)
+}
