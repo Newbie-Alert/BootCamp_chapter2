@@ -3,6 +3,7 @@ const movieCard = document.querySelector('.movie_card');
 const searchForm = document.querySelector('.search_form');
 const searchInput = document.querySelector('#search_input')
 const resetBtn = document.querySelector('.reset_button');
+const searchLogContainer = document.querySelector('.search_log');
 const searchList = document.querySelector('.search_log_list');
 const options = {
   method: 'GET',
@@ -21,6 +22,7 @@ searchForm.addEventListener('submit', (e) => {
   searchMovie(searchInput.value)
   searchLog(searchInput.value)
   searchInput.value = ''
+  searchLogContainer.id = ''
 })
 
 // 영화 카드 클릭 시 alert
@@ -77,6 +79,7 @@ async function searchMovie(searchValue) {
   let filtered = data.filter(el => (el.title.toLowerCase()).includes(searchValue.toLowerCase()))
   movieContainer.innerHTML = ``;
   createCard(filtered)
+
 }
 
 function searchLog(searchValue) {

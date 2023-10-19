@@ -17,6 +17,10 @@ body {
   background-color: #191c1d;
 }
 
+#hide {
+  display: none;
+}
+
 
 
 /* HEADER */
@@ -39,7 +43,7 @@ header {
 .search_container {
   width: 100%;
   text-align: center;
-  padding: 1.25rem 1.25rem 0.5rem 1.25rem;
+  padding: 1.25rem;
   font-size: 2rem;
   display: flex;
   justify-content: center;
@@ -100,7 +104,6 @@ header {
 
 
 /* Search Log */
-
 .search_log {
   margin-left: auto;
   margin-right: auto;
