@@ -57,7 +57,8 @@ async function fetchData() {
 // 카드 UI 그리기
 function createCard(data) {
   data?.forEach(el => {
-    let tempHTML = data.length === 0 ? `<div><h1>찾는 정보가 없습니다</h1></div>`
+    let tempHTML = data.length === 0
+      ? `<div><h1>찾는 정보가 없습니다</h1></div>`
       :
       `<div class="movie_card") data-id = '${el.id}' 
     onclick = "alert('영화 id: ${el.id}')" >
@@ -77,7 +78,6 @@ function createCard(data) {
 
 // 검색 후 해당되는 데이터로 카드 UI 그리기
 async function searchMovie(searchValue) {
-
   const res = await fetch(`https://api.themoviedb.org/3/movie/top_rated?
   language=en-US&page=1`, options)
   let data = await res.json();
