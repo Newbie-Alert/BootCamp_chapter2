@@ -21,13 +21,13 @@ searchForm.addEventListener('submit', (e) => {
   e.preventDefault();
   searchMovie(searchInput.value)
   searchLog(searchInput.value)
+
   searchInput.value = ''
   searchLogContainer.id = ''
 })
 
 // 영화 카드 클릭 시 alert
 movieCard?.addEventListener('click', (e) => {
-  console.log(e.target.dataset.id);
   alert(`영화 id: ${e.target.dataset.id}`)
 })
 
@@ -46,8 +46,10 @@ resetBtn.addEventListener('click', () => {
 
 // 데이터 fetch 후 초기 화면 그리기
 async function fetchData() {
-  const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+  const res = await fetch(`https://api.themoviedb.org/3/movie/top_rated?
+  language=en-US&page=1`, options)
   let data = await res.json();
+
   // 카드 UI로 데이터 전달
   createCard(data.results);
 }
@@ -55,7 +57,9 @@ async function fetchData() {
 // 카드 UI 그리기
 function createCard(data) {
   data?.forEach(el => {
-    let tempHTML = `<div class="movie_card") data-id = '${el.id}' onclick="alert('영화 id: ${el.id}')" >
+    let tempHTML = `
+    <div class="movie_card") data-id = '${el.id}'
+    onclick="alert('영화 id: ${el.id}')" >
         <div class="movie_card_img">
           <img src=${`https://image.tmdb.org/t/p/w300` + el.poster_path} alt="" />
         </div>
@@ -72,17 +76,21 @@ function createCard(data) {
 
 // 검색 후 해당되는 데이터로 카드 UI 그리기
 async function searchMovie(searchValue) {
-  let data;
-  const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
-  data = await res.json();
+
+  const res = await fetch(`https://api.themoviedb.org/3/movie/top_rated?
+  language=en-US&page=1`, options)
+  let data = await res.json();
   data = data.results;
+
   let filtered = data.filter(el => (el.title.toLowerCase()).includes(searchValue.toLowerCase()))
   movieContainer.innerHTML = ``;
-  createCard(filtered)
 
+  createCard(filtered)
 }
 
 function searchLog(searchValue) {
-  let logHTML = `<li class="list_item" data-name=${searchValue} onclick="(e) => searchByLog(e)">${searchValue}</li>`;
+  let logHTML = `<li class="list_item" data-name=${searchValue}
+  onclick="(e) => searchByLog(e)">${searchValue}</li>`;
+
   searchList.insertAdjacentHTML('beforeend', logHTML)
 }
