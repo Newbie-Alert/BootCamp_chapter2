@@ -56,10 +56,10 @@ async function fetchData() {
 
 // 카드 UI 그리기
 function createCard(data) {
-  let emptyHtml = `<div><h1>찾는 정보가 없습니다</h1></div>`
   data?.forEach(el => {
-    let tempHTML = `
-    <div class="movie_card") data-id = '${el.id}' 
+    let tempHTML = data.length === 0 ? `<div><h1>찾는 정보가 없습니다</h1></div>`
+      :
+      `<div class="movie_card") data-id = '${el.id}' 
     onclick = "alert('영화 id: ${el.id}')" >
         <div class="movie_card_img">
           <img src=${`https://image.tmdb.org/t/p/w300` + el.poster_path} alt="" />
@@ -71,12 +71,7 @@ function createCard(data) {
         <h4 class='average_score'>Rating: ${el.vote_average}</h4>
     </div >`
 
-    if (data.length === 0) {
-      movieContainer.insertAdjacentHTML('beforebegin', emptyHtml)
-    } else {
-      movieContainer.insertAdjacentHTML('beforeend', tempHTML)
-    }
-
+    movieContainer.insertAdjacentHTML('beforeend', tempHTML)
   })
 }
 
